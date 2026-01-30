@@ -37,3 +37,12 @@ To check drop packet in server,
 
 The client retries the SYN packet multiple times before timing out. Later drop stop and the SYN-ACK starting generated means now client get's packets.
 
+To see inside the brain of a single process.
+
+- **The Goal:** Find the syscall that is waiting. You will likely see `epoll_wait` just sitting there, doing nothing, because the packets are being dropped before they hit the process.
+- **Status:** Completed
+- **Command Run:** `sudo strace -p <SERVICE-WORKER-PID>`, `ps aux | grep <SERVICE>`
+- **Unexpected Behavior:** You'll see `accept4(...)` (taking the incoming connection) and `epoll_wait` (waiting for data).
+- **Hypothesis:** Server firewall **DROP** the packets
+- **Evidence:** Run `curl --max-time 8 <SERVER-IP>` & Check use `sudo strace -o trace.log -p <SERVICE-WORKER-PID>`.
+
