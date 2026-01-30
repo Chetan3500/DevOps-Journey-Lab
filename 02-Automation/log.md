@@ -9,6 +9,8 @@
 - **Add**: [`watchdog.sh`](./watchdog.sh) to check on nginx service.
 - **Evidence**: Run `./watchdog.sh`
 
+---
+
 ## Automated Watchdog
 
 - **Goal:** Automate Nginx recovery using Cron.
@@ -18,3 +20,15 @@
 - **Learning:** Cron has a limited "PATH" environment. Always use full paths in scripts.
 - **Evidence:** Check log `less -f /var/log/watchdog.log`
     ![Watchdog Logs](../img/crontab.png)
+
+---
+
+## Analyze Logs
+
+- **Goal**: Look for top 5 IP in Logs. (Later add count `404`)
+- **Problem**: Manual search, repeative lookup.
+- **Action**: Put repeative task into script.
+- **Script**: Provide Top 5 IP along with count.
+- **Add**: [`analyze-logs.sh`](../scripts/analyze-logs.sh)
+- **Evidence**: Run `./analyze-logs.sh`
+    ![analyze-logs](../img/analyze_logs.png)
